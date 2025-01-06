@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv8s0dnbp77n7"]
+[gd_scene load_steps=6 format=3 uid="uid://cv8s0dnbp77n7"]
 
+[ext_resource type="Script" path="res://bob.gd" id="1_b4xcb"]
 [ext_resource type="PackedScene" uid="uid://c4nn5y2kyc631" path="res://bob/thats_bob.glb" id="1_x7xgi"]
 
 [sub_resource type="Animation" id="Animation_7herm"]
@@ -12,9 +13,11 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hod1m"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Bob" type="CharacterBody3D"]
+script = ExtResource("1_b4xcb")
 
 [node name="thats_bob" parent="." instance=ExtResource("1_x7xgi")]
+transform = Transform3D(0.177042, 0, 0, 0, 0.177042, 0, 0, 0, 0.177042, 0, -0.993381, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="thats_bob"]
 libraries = {

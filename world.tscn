@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsxpbeisimrty"]
+
+[ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://bob.tscn" id="1_35doi"]
+[ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a23g0"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hlqya"]
+size = Vector2(10, 10)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o1jm2"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_kacjv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0.000346354, 0.000269038, -0.000346412, 1, 0.00021554, -0.000268963, -0.000215633, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_a23g0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_hlqya")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="MeshInstance3D"]
+navigation_mesh = SubResource("NavigationMesh_o1jm2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.000977353, 1, 0, -1, 0.000977353, 0, 5.95843, 0)
+
+[node name="Bob" parent="." instance=ExtResource("1_35doi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1979, 1, -0.55701)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 7.57104e-08, 4.37114e-08, 7.5278e-08, 0.491481, 0.870888, 4.44519e-08, 0.870888, -0.491481, 0, 6.934, -5.638)
