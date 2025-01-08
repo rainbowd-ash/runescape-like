@@ -9,7 +9,7 @@ var moving = false
 func _physics_process(delta):
 	if moving:
 		var direction = (target_position - global_transform.origin)
-		if direction.length() > 0.1:  # Keep moving if not close enough
+		if direction.length() > 0.01:  # Keep moving if not close enough
 			direction = direction.normalized()
 			velocity = direction * speed
 			
@@ -24,5 +24,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 func set_target_position(position: Vector3):
-	target_position = position
+	target_position = position.snapped(Vector3(1, 1, 1))
 	moving = true

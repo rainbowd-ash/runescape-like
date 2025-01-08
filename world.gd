@@ -11,6 +11,7 @@ func _input(event):
 		
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 		query.collide_with_areas = true
+		query.exclude = [$Bob]
 		var result = space_state.intersect_ray(query)
 		
 		if result:
