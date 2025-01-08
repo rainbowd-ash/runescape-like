@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6o7otkin5ej"
-path.s3tc="res://.godot/imported/thats_bob_mBody_Alb.png-3dcf07846908e8d99ec5ef156b195823.s3tc.ctex"
+uid="uid://drb2wnlfj1yg"
+path.s3tc="res://.godot/imported/thats_bob_mMouth_Alb.png-1709d85dae9e3398984394a3ddb020d0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "70e4b601b99bed9696020975167758b5"
+"md5": "3aca5c6e21084a24c50e8b308f61d291"
 }
 
 [deps]
 
-source_file="res://bob/thats_bob_mBody_Alb.png"
-dest_files=["res://.godot/imported/thats_bob_mBody_Alb.png-3dcf07846908e8d99ec5ef156b195823.s3tc.ctex"]
+source_file="res://player/bob_model/thats_bob_mMouth_Alb.png"
+dest_files=["res://.godot/imported/thats_bob_mMouth_Alb.png-1709d85dae9e3398984394a3ddb020d0.s3tc.ctex"]
 
 [params]
 

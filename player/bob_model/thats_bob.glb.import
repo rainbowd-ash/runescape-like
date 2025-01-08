@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c4nn5y2kyc631"
-path="res://.godot/imported/thats_bob.glb-ceea9117d3258ba21bf386f814901861.scn"
+path="res://.godot/imported/thats_bob.glb-b41f86343defadab46a1474c5204a49b.scn"
 
 [deps]
 
-source_file="res://bob/thats_bob.glb"
-dest_files=["res://.godot/imported/thats_bob.glb-ceea9117d3258ba21bf386f814901861.scn"]
+source_file="res://player/bob_model/thats_bob.glb"
+dest_files=["res://.godot/imported/thats_bob.glb-b41f86343defadab46a1474c5204a49b.scn"]
 
 [params]
 
