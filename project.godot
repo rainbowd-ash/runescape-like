@@ -19,3 +19,7 @@ config/icon="res://icon.svg"
 
 3d_physics/layer_1="Ground"
 3d_physics/layer_2="Player Character"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

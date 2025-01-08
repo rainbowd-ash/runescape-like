@@ -1,37 +1,59 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsxpbeisimrty"]
+[gd_scene load_steps=10 format=3 uid="uid://dsxpbeisimrty"]
 
 [ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://player/bob.tscn" id="1_35doi"]
 [ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
+[ext_resource type="Texture2D" uid="uid://dmlb2qujcwfkf" path="res://img/ground.png" id="2_6avuv"]
+[ext_resource type="Script" path="res://camera_follow.gd" id="4_66d2y"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_hlqya"]
-size = Vector2(10, 10)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdt16"]
+albedo_texture = ExtResource("2_6avuv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5afia"]
+material = SubResource("StandardMaterial3D_tdt16")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a23g0"]
 size = Vector3(10, 1, 10)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o1jm2"]
 
-[node name="World" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_hlqya"]
+size = Vector2(10, 10)
+
+[node name="World" type="Node3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_kacjv")
+camera = NodePath("CameraFollow/Camera")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_hlqya")
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1024, 0, 0, 0, 1024, 0, 0, 0, 1024, 0, 9.53674e-07, 0)
+mesh = SubResource("PlaneMesh_5afia")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+transform = Transform3D(0.000976562, 0, 0, 0, 0.000976562, 0, 0, 0, 0.000976562, 0, 0, 0)
+visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0.000346354, 0.000269038, -0.000346412, 1, 0.00021554, -0.000268963, -0.000215633, 1, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1024, 0.000346354, 0.275495, -0.354726, 1, 0.220713, -0.275418, -0.000215633, 1024, 0, 0, 0)
 shape = SubResource("BoxShape3D_a23g0")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="MeshInstance3D"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Ground"]
+transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0)
 navigation_mesh = SubResource("NavigationMesh_o1jm2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_hlqya")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.000977353, 1, 0, -1, 0.000977353, 0, 5.95843, 0)
 
-[node name="Bob" parent="." instance=ExtResource("1_35doi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.270008, 2.42493, -0.0322719)
-collision_layer = 2
+[node name="CameraFollow" type="Node3D" parent="."]
+transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, -39.704, 2.42493, -0.0322719)
+script = ExtResource("4_66d2y")
+player_path = NodePath("../Bob")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -6.18172e-08, 6.18172e-08, 2.40794e-08, 0.484993, 0.874518, -8.40412e-08, 0.874518, -0.484993, 0, 7.17297, -5.76872)
+[node name="Camera" type="Camera3D" parent="CameraFollow"]
+transform = Transform3D(-0.999829, 0.0119523, 0.0141026, 0.0181297, 0.783069, 0.62167, -0.00361297, 0.621819, -0.783153, 0.385933, 6.34676, -5.50451)
+
+[node name="Bob" parent="." instance=ExtResource("1_35doi")]
+transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, -39.704, 2.42493, -0.0322719)
+collision_layer = 2
