@@ -1,10 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsxpbeisimrty"]
+[gd_scene load_steps=14 format=3 uid="uid://dsxpbeisimrty"]
 
 [ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://player/bob.tscn" id="1_35doi"]
 [ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
 [ext_resource type="Texture2D" uid="uid://dmlb2qujcwfkf" path="res://img/ground.png" id="2_6avuv"]
 [ext_resource type="Script" path="res://camera_gimbal.gd" id="5_dnixe"]
 [ext_resource type="PackedScene" uid="uid://bxoeagxlnx4w7" path="res://models/barrel.glb" id="5_g6sfj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep8v8"]
+sky_top_color = Color(0.339645, 0.495673, 1, 1)
+sky_horizon_color = Color(0.707504, 0.596065, 0.850408, 1)
+sky_curve = 0.117688
+
+[sub_resource type="Sky" id="Sky_1v4g5"]
+sky_material = SubResource("ProceduralSkyMaterial_ep8v8")
+
+[sub_resource type="Environment" id="Environment_1a6i2"]
+background_mode = 2
+sky = SubResource("Sky_1v4g5")
+ambient_light_source = 3
+ambient_light_energy = 16.0
+reflected_light_source = 2
+fog_light_energy = 3.19
+fog_density = 0.0925
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdt16"]
 albedo_texture = ExtResource("2_6avuv")
@@ -23,6 +40,18 @@ size = Vector2(10, 10)
 [node name="World" type="Node3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_kacjv")
 camera = NodePath("CameraGimbal/InnerGimbal/Camera3D")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1a6i2")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.417772, 0.908552, 0, -0.908552, -0.417772, 0, 5.95843, 0)
+light_energy = 2.17
+light_indirect_energy = 9.946
+shadow_enabled = true
+shadow_normal_bias = 0.1
+shadow_opacity = 0.95
+shadow_blur = 0.5
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1024, 0, 0, 0, 1024, 0, 0, 0, 1024, 0, 9.53674e-07, 0)
@@ -43,9 +72,6 @@ navigation_mesh = SubResource("NavigationMesh_o1jm2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("PlaneMesh_hlqya")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.000977353, 1, 0, -1, 0.000977353, 0, 5.95843, 0)
 
 [node name="Bob" parent="." instance=ExtResource("1_35doi")]
 transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, -39.704, 2.42493, -0.0322719)
