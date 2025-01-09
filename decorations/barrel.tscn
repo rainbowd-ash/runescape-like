@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnkavjf2ivgr0"]
+
+[ext_resource type="PackedScene" uid="uid://bxoeagxlnx4w7" path="res://models/barrel.glb" id="1_ops7b"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2tksc"]
+height = 0.906542
+
+[node name="StaticBarrel" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_2tksc")
+
+[node name="barrel" parent="." instance=ExtResource("1_ops7b")]

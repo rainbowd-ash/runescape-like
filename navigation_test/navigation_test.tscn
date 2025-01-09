@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dm2hod2h7ka6b"]
+
+[ext_resource type="Script" path="res://navigation_test/navigation_npc.gd" id="1_fm30n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4cxwx"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ktgby"]
+sky_material = SubResource("ProceduralSkyMaterial_4cxwx")
+
+[sub_resource type="Environment" id="Environment_iuhq5"]
+background_mode = 2
+sky = SubResource("Sky_ktgby")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qc1yu"]
+vertices = PackedVector3Array(-4.5, 0.5, -4.5, -4.5, 0.5, 4.5, 4.5, 0.5, 4.5, 4.5, 0.5, -4.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dvsaf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hjlwj"]
+radius = 0.137669
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iuhq5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_qc1yu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(10, 1, 10)
+
+[node name="NavigationNPC" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20854, 0)
+script = ExtResource("1_fm30n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationNPC"]
+mesh = SubResource("CapsuleMesh_dvsaf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationNPC"]
+shape = SubResource("CapsuleShape3D_hjlwj")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NavigationNPC"]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+debug_enabled = true

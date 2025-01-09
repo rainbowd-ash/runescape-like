@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsxpbeisimrty"]
+[gd_scene load_steps=13 format=3 uid="uid://dsxpbeisimrty"]
 
 [ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://player/bob.tscn" id="1_35doi"]
 [ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
 [ext_resource type="Texture2D" uid="uid://dmlb2qujcwfkf" path="res://img/ground.png" id="2_6avuv"]
 [ext_resource type="Script" path="res://camera_gimbal.gd" id="5_dnixe"]
-[ext_resource type="PackedScene" uid="uid://bxoeagxlnx4w7" path="res://models/barrel.glb" id="5_g6sfj"]
+[ext_resource type="PackedScene" uid="uid://dnkavjf2ivgr0" path="res://decorations/barrel.tscn" id="6_bpj6x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep8v8"]
 sky_top_color = Color(0.339645, 0.495673, 1, 1)
@@ -23,19 +23,21 @@ reflected_light_source = 2
 fog_light_energy = 3.19
 fog_density = 0.0925
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdt16"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_eibs8"]
+vertices = PackedVector3Array(7, 0.5, -0.75, 8, 0.5, -1, 8, 0.5, -63.5, -63.5, 0.5, -63.5, -63.5, 0.5, 0, 7, 0.5, 0, 8.75, 0.5, -1, 9, 0.5, 0, 63.5, 0.5, 0, 63.5, 0.5, -63.5, 8, 0.5, 63.5, 8, 0.5, 1, 7, 0.5, 0.75, -63.5, 0.5, 63.5, 8.75, 0.5, 1, 63.5, 0.5, 63.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 2), PackedInt32Array(6, 1, 2), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(12, 13, 4), PackedInt32Array(4, 5, 12), PackedInt32Array(7, 8, 14), PackedInt32Array(14, 8, 15), PackedInt32Array(14, 15, 10), PackedInt32Array(10, 11, 14)]
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"navigation_obstacle"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swwcr"]
 albedo_texture = ExtResource("2_6avuv")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_5afia"]
-material = SubResource("StandardMaterial3D_tdt16")
+[sub_resource type="PlaneMesh" id="PlaneMesh_n1rbv"]
+material = SubResource("StandardMaterial3D_swwcr")
+size = Vector2(128, 128)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_a23g0"]
-size = Vector3(10, 1, 10)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_o1jm2"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_hlqya"]
-size = Vector2(10, 10)
+[sub_resource type="BoxShape3D" id="BoxShape3D_qqang"]
+size = Vector3(128, 1, 128)
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_kacjv")
@@ -53,38 +55,33 @@ shadow_normal_bias = 0.1
 shadow_opacity = 0.95
 shadow_blur = 0.5
 
-[node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1024, 0, 0, 0, 1024, 0, 0, 0, 1024, 0, 9.53674e-07, 0)
-mesh = SubResource("PlaneMesh_5afia")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_eibs8")
+
+[node name="Ground" type="MeshInstance3D" parent="." groups=["navigation_obstacle"]]
+mesh = SubResource("PlaneMesh_n1rbv")
+skeleton = NodePath("../NavigationRegion3D")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
-transform = Transform3D(0.000976562, 0, 0, 0, 0.000976562, 0, 0, 0, 0.000976562, 0, 0, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-transform = Transform3D(1024, 0.000346354, 0.275495, -0.354726, 1, 0.220713, -0.275418, -0.000215633, 1024, 0, 0, 0)
-shape = SubResource("BoxShape3D_a23g0")
+shape = SubResource("BoxShape3D_qqang")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Ground"]
-transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0)
-navigation_mesh = SubResource("NavigationMesh_o1jm2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("PlaneMesh_hlqya")
-
-[node name="Bob" parent="." instance=ExtResource("1_35doi")]
-transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, -39.704, 2.42493, -0.0322719)
-collision_layer = 2
-
-[node name="barrel" parent="." instance=ExtResource("5_g6sfj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3387, 0.512984, 3.44743)
+[node name="Barrel" parent="." groups=["navigation_obstacle"] instance=ExtResource("6_bpj6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.453271, 0)
 
 [node name="CameraGimbal" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 0, 3.72529e-09, 0, 1, 0, 0, 0)
 script = ExtResource("5_dnixe")
 target = NodePath("../Bob")
 
 [node name="InnerGimbal" type="Node3D" parent="CameraGimbal"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraGimbal/InnerGimbal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Bob" parent="." instance=ExtResource("1_35doi")]
+transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, 2.99043, 1, -0.0322719)
+collision_layer = 2

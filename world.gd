@@ -16,4 +16,4 @@ func _input(event):
 		var result = space_state.intersect_ray(query)
 		
 		if result:
-			$Bob.set_target_position(result.position)
+			$Bob.set_movement_target(result.position)
