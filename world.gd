@@ -16,4 +16,9 @@ func _input(event):
 		var result = space_state.intersect_ray(query)
 		
 		if result:
-			$Bob.set_movement_target(result.position)
+			var movement_details = {
+				target_position = result.position
+			}
+			if result.collider.is_in_group("interactables"):
+				movement_details.target_interactable = result.collider
+			$Bob.set_movement_target(movement_details)

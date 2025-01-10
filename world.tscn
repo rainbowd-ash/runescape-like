@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsxpbeisimrty"]
+[gd_scene load_steps=14 format=3 uid="uid://dsxpbeisimrty"]
 
 [ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://player/bob.tscn" id="1_35doi"]
 [ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
 [ext_resource type="Texture2D" uid="uid://dmlb2qujcwfkf" path="res://img/ground.png" id="2_6avuv"]
 [ext_resource type="Script" path="res://camera_gimbal.gd" id="5_dnixe"]
-[ext_resource type="PackedScene" uid="uid://dnkavjf2ivgr0" path="res://decorations/barrel.tscn" id="6_bpj6x"]
+[ext_resource type="PackedScene" uid="uid://dnkavjf2ivgr0" path="res://decorations/barrel/barrel.tscn" id="6_bpj6x"]
+[ext_resource type="PackedScene" uid="uid://ct25fgme622k0" path="res://decorations/wagon/wagon.tscn" id="6_k8xy3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep8v8"]
 sky_top_color = Color(0.339645, 0.495673, 1, 1)
@@ -24,10 +25,11 @@ fog_light_energy = 3.19
 fog_density = 0.0925
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_eibs8"]
-vertices = PackedVector3Array(7, 0.5, -0.75, 8, 0.5, -1, 8, 0.5, -63.5, -63.5, 0.5, -63.5, -63.5, 0.5, 0, 7, 0.5, 0, 8.75, 0.5, -1, 9, 0.5, 0, 63.5, 0.5, 0, 63.5, 0.5, -63.5, 8, 0.5, 63.5, 8, 0.5, 1, 7, 0.5, 0.75, -63.5, 0.5, 63.5, 8.75, 0.5, 1, 63.5, 0.5, 63.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 2), PackedInt32Array(6, 1, 2), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(12, 13, 4), PackedInt32Array(4, 5, 12), PackedInt32Array(7, 8, 14), PackedInt32Array(14, 8, 15), PackedInt32Array(14, 15, 10), PackedInt32Array(10, 11, 14)]
+vertices = PackedVector3Array(-63, 0.42045, 3.75, -13.5, 0.42045, 3.75, -12.5, 0.42045, 2.25, -9.25, 0.42045, 0.5, -9.25, 0.42045, -63, -63, 0.42045, -63, 7.25, 0.42045, 2.5, 7.5, 0.42045, 1.5, 6.5, 0.42045, 0.75, 3.75, 0.42045, 2.75, -11.25, 2.17045, 3.75, -11.25, 2.17045, 4.5, -9.75, 2.17045, 6.75, -6.75, 0.92045, 5, -8.25, 0.67045, 2, 3, 0.42045, 3.5, 6.5, 0.42045, -0.75, -8.25, 0.42045, 1, -5.75, 0.42045, 5, -5.25, 0.42045, 5.75, 3, 0.42045, 5.75, 7.25, 0.42045, -1.5, 8, 0.42045, -63, 8, 0.42045, -1.5, 9.5, 0.42045, -0.75, 9.5, 0.42045, 0, 63, 0.42045, 0, 8.75, 0.42045, -1.5, 63, 0.42045, -63, 8.75, 0.42045, 1.5, 8.5, 0.42045, 3.25, 9.5, 0.42045, 0.75, 8.5, 0.42045, 6.25, 63, 0.42045, 6.25, -13.5, 0.42045, 4.5, -11.5, 0.42045, 7.75, -9.75, 0.42045, 9, -63, 0.42045, 63, -9.75, 0.42045, 63, 3.75, 0.42045, 7, -6.25, 0.42045, 7.25, -9, 0.42045, 9, 6, 0.42045, 7.25, 6, 0.42045, 63, 7.75, 0.42045, 7.25, 63, 0.42045, 63)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(13, 10, 14), PackedInt32Array(9, 15, 16), PackedInt32Array(16, 15, 17), PackedInt32Array(16, 17, 3), PackedInt32Array(16, 8, 9), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 15), PackedInt32Array(19, 15, 20), PackedInt32Array(16, 3, 21), PackedInt32Array(21, 3, 4), PackedInt32Array(21, 4, 22), PackedInt32Array(13, 14, 18), PackedInt32Array(18, 14, 17), PackedInt32Array(22, 23, 21), PackedInt32Array(26, 25, 24), PackedInt32Array(24, 27, 26), PackedInt32Array(26, 27, 28), PackedInt32Array(28, 27, 22), PackedInt32Array(27, 23, 22), PackedInt32Array(7, 29, 6), PackedInt32Array(6, 29, 30), PackedInt32Array(31, 25, 26), PackedInt32Array(29, 31, 30), PackedInt32Array(30, 31, 32), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 26), PackedInt32Array(0, 1, 34), PackedInt32Array(0, 34, 35), PackedInt32Array(35, 36, 0), PackedInt32Array(0, 36, 38), PackedInt32Array(0, 38, 37), PackedInt32Array(20, 39, 19), PackedInt32Array(19, 39, 40), PackedInt32Array(38, 36, 41), PackedInt32Array(39, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(41, 42, 43), PackedInt32Array(41, 43, 38), PackedInt32Array(32, 33, 44), PackedInt32Array(44, 33, 45), PackedInt32Array(44, 45, 43), PackedInt32Array(43, 42, 44)]
 geometry_source_geometry_mode = 1
 geometry_source_group_name = &"navigation_obstacle"
+agent_radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swwcr"]
 albedo_texture = ExtResource("2_6avuv")
@@ -68,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("BoxShape3D_qqang")
 
-[node name="Barrel" parent="." groups=["navigation_obstacle"] instance=ExtResource("6_bpj6x")]
+[node name="Barrel" parent="." groups=["interactables", "navigation_obstacle"] instance=ExtResource("6_bpj6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.453271, 0)
 
 [node name="CameraGimbal" type="Node3D" parent="." node_paths=PackedStringArray("target")]
@@ -85,3 +87,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 [node name="Bob" parent="." instance=ExtResource("1_35doi")]
 transform = Transform3D(0.998883, 0, 0.0472459, 0, 1, 0, -0.0472459, 0, 0.998883, 2.99043, 1, -0.0322719)
 collision_layer = 2
+wall_min_slide_angle = 1.0664
+floor_block_on_wall = false
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="." groups=["navigation_obstacle"]]
+transform = Transform3D(0.846546, 0, 0.532315, 0, 1, 0, -0.532315, 0, 0.846546, -9.81184, 0, 7.98311)
+use_collision = true
+polygon = PackedVector2Array(0, 2, 5, 0, 0, 0)
+depth = 5.0
+
+[node name="Wagon" parent="." instance=ExtResource("6_k8xy3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.82922, 0, 5.21575)
