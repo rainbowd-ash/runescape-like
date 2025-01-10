@@ -12,6 +12,7 @@ var target_interactable : Node3D
 func _ready():
 	# Make sure to not await during _ready.
 	actor_setup.call_deferred()
+	navigation_agent.connect("navigation_finished", _on_navigation_finished)
 
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
@@ -38,3 +39,10 @@ func _physics_process(delta):
 	
 	velocity = direction * movement_speed
 	move_and_slide()
+
+func _on_navigation_finished():
+	if not target_interactable:
+		return
+	if not target_interactable.has_method("interact"):
+		return
+	target_interactable.interact()
