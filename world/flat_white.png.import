@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr72kjil43vgj"
-path.bptc="res://.godot/imported/rock030_nrm_rgh.png-2cdb7838da06bcbe8c41800e68b36b1b.bptc.ctex"
+uid="uid://ci3gbp1gbutey"
+path.s3tc="res://.godot/imported/flat_white.png-0948bcad0974745452c91f7ecbf466b5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,16 +11,16 @@ metadata={
 
 [deps]
 
-source_file="res://demo/assets/textures/rock030_nrm_rgh.png"
-dest_files=["res://.godot/imported/rock030_nrm_rgh.png-2cdb7838da06bcbe8c41800e68b36b1b.bptc.ctex"]
+source_file="res://world/flat_white.png"
+dest_files=["res://.godot/imported/flat_white.png-0948bcad0974745452c91f7ecbf466b5.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-signal reached_interactable(details)
-
 @export var movement_speed : float = 4.0
 @export var rotation_speed : float = 5.0
 
@@ -21,7 +19,6 @@ func actor_setup():
 func set_movement_target(movement_details : Dictionary):
 	if movement_details.has('target_position'):
 		navigation_agent.set_target_position(movement_details.target_position)
-		$Animation.play("walk")
 	if movement_details.has('target_interactable'):
 		target_interactable = movement_details.target_interactable
 	else:
@@ -41,7 +38,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_navigation_finished():
-	$Animation.stop()
 	if not target_interactable:
 		return
 	if not target_interactable.has_method("interact"):
