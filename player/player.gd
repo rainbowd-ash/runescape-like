@@ -21,6 +21,7 @@ func actor_setup():
 func set_movement_target(movement_details : Dictionary):
 	if movement_details.has('target_position'):
 		navigation_agent.set_target_position(movement_details.target_position)
+		$Animation.play("walk")
 	if movement_details.has('target_interactable'):
 		target_interactable = movement_details.target_interactable
 	else:
@@ -29,7 +30,6 @@ func set_movement_target(movement_details : Dictionary):
 func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
 		return
-	
 	var destination = navigation_agent.get_next_path_position()
 	var local_destination = destination - global_position
 	var direction = local_destination.normalized()
@@ -41,6 +41,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_navigation_finished():
+	$Animation.stop()
 	if not target_interactable:
 		return
 	if not target_interactable.has_method("interact"):

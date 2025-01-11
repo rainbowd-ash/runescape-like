@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var camera : Node3D
+@export var player : Node3D
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -12,7 +13,7 @@ func _input(event):
 		
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 		query.collide_with_areas = true
-		query.exclude = [$Bob]
+		query.exclude = [player]
 		var result = space_state.intersect_ray(query)
 		
 		if result:
@@ -21,4 +22,4 @@ func _input(event):
 			}
 			if result.collider.is_in_group("interactables"):
 				movement_details.target_interactable = result.collider
-			$Bob.set_movement_target(movement_details)
+			player.set_movement_target(movement_details)

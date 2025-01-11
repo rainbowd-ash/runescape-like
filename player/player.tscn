@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv8s0dnbp77n7"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_b4xcb"]
+[ext_resource type="PackedScene" uid="uid://rbppgshf8q8v" path="res://player/char2.glb" id="3_gmm5t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hod1m"]
+
+[sub_resource type="Animation" id="Animation_5ml8u"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.113446)]
+}
+
+[sub_resource type="Animation" id="Animation_3ss0r"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.113446), Vector3(0, 0, 0.113446), Vector3(0, 0, -0.113446)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kagve"]
+_data = {
+"RESET": SubResource("Animation_5ml8u"),
+"walk": SubResource("Animation_3ss0r")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_b4xcb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.33633, 0, 0, 0, 1.33633, 0, 0, 0, 1.33633, 0, 0.149988, 0)
+shape = SubResource("CapsuleShape3D_hod1m")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.5
+avoidance_enabled = true
+radius = 1.2
+debug_enabled = true
+
+[node name="char2" parent="." instance=ExtResource("3_gmm5t")]
+transform = Transform3D(0.264903, 0.0301818, 0, -0.0301818, 0.264903, 0, 0, 0, 0.266616, 0, -1.04189, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../char2")
+libraries = {
+"": SubResource("AnimationLibrary_kagve")
+}
