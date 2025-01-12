@@ -21,7 +21,7 @@ enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 [global_group]
 
-navigation_obstacle="navigationmesh will pathfind around"
+interactables=""
 
 [input]
 

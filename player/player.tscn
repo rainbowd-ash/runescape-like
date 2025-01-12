@@ -4,18 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://rbppgshf8q8v" path="res://player/char2.glb" id="3_gmm5t"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hod1m"]
-radius = 0.0413863
+radius = 0.0936298
 
 [node name="Player" type="CharacterBody3D"]
 floor_block_on_wall = false
 script = ExtResource("1_b4xcb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.33633, 0, 0, 0, 1.33633, 0, 0, 0, 1.33633, 0, 0.149988, 0)
+transform = Transform3D(1.33633, 0, 0, 0, 1.33633, 0, 0, 0, 1.33633, 0, 0.155543, 0)
 shape = SubResource("CapsuleShape3D_hod1m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 0.3
+avoidance_enabled = true
 debug_enabled = true
 
 [node name="char2" parent="." instance=ExtResource("3_gmm5t")]

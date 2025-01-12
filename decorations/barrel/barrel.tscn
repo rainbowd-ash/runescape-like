@@ -6,7 +6,7 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2tksc"]
 height = 0.906542
 
-[node name="Barrel" type="StaticBody3D"]
+[node name="Barrel" type="StaticBody3D" groups=["interactables"]]
 script = ExtResource("1_pf8os")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
