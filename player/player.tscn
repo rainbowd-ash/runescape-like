@@ -6,6 +6,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hod1m"]
 
 [node name="Player" type="CharacterBody3D"]
+floor_block_on_wall = false
 script = ExtResource("1_b4xcb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
