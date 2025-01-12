@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8gjsecymguhq"]
+
+[ext_resource type="PackedScene" uid="uid://jxmjbkfe4wdc" path="res://decorations/shovel/shovel.glb" id="1_ravub"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4va52"]
+height = 2.66511
+radius = 0.326586
+
+[node name="Shovel" type="Node3D"]
+
+[node name="shovel" parent="." instance=ExtResource("1_ravub")]
+transform = Transform3D(-0.6, 0, -5.24537e-08, 0, 0.6, 0, 5.24537e-08, 0, -0.6, 0, -1.03893, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.153646, 0)
+shape = SubResource("CylinderShape3D_4va52")
