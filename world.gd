@@ -3,7 +3,7 @@ extends Node3D
 @export var camera : Node3D
 @export var player : Node3D
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var space_state = get_world_3d().direct_space_state
 		var mousepos = get_viewport().get_mouse_position()

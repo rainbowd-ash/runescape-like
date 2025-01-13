@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_qtm62"]
 size = Vector3(2.99046, 2.22882, 2.37738)
 
-[node name="Wagon" type="StaticBody3D"]
+[node name="Wagon" type="StaticBody3D" groups=["include_in_navigation"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17078, 0, 0.215754)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

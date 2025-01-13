@@ -15,7 +15,6 @@ transform = Transform3D(1.33633, 0, 0, 0, 1.33633, 0, 0, 0, 1.33633, 0, 0.155543
 shape = SubResource("CapsuleShape3D_hod1m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 0.3
 avoidance_enabled = true
 debug_enabled = true
 
