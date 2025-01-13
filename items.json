@@ -1,6 +1,10 @@
 {
 	"shovel" : {
 		"name" : "shovel",
-		"image" : "res://img/shovel_icon.png",
+		"image" : "res://items/shovel_icon.png",
 	},
+	"artifact" : {
+		"name" : "artifact",
+		"image" : "res://items/artifact_icon.png",
+	}
 }

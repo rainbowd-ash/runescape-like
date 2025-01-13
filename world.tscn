@@ -35,20 +35,7 @@ player = NodePath("Player")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="HUD/Control"]
-layout_mode = 1
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -59,11 +46,11 @@ offset_top = -224.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CtrlInventoryGrid" type="Control" parent="HUD/Control/PanelContainer" node_paths=PackedStringArray("inventory")]
+[node name="CtrlInventoryGrid" type="Control" parent="HUD/PanelContainer" node_paths=PackedStringArray("inventory")]
 custom_minimum_size = Vector2(128, 224)
 layout_mode = 2
 script = ExtResource("5_55uii")
-inventory = NodePath("../../../../Player/Inventory")
+inventory = NodePath("../../../Player/Inventory")
 selection_style = SubResource("StyleBoxEmpty_uv31r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -92,10 +79,11 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
 [node name="Player" parent="." node_paths=PackedStringArray("inventory_control") instance=ExtResource("1_35doi")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.7403, 1.28838, -125.605)
 collision_layer = 2
 wall_min_slide_angle = 1.0664
-inventory_control = NodePath("../HUD/Control/PanelContainer/CtrlInventoryGrid")
+inventory_control = NodePath("../HUD/PanelContainer/CtrlInventoryGrid")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("6_nyupt")
