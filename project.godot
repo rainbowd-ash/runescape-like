@@ -17,11 +17,12 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/gloot/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [global_group]
 
-navigation_obstacle="navigationmesh will pathfind around"
+interactables=""
+include_in_navigation=""
 
 [input]
 
@@ -66,6 +67,7 @@ selection={
 
 3d_physics/layer_1="Ground"
 3d_physics/layer_2="Player Character"
+3d_physics/layer_3="Interactable"
 
 [rendering]
 

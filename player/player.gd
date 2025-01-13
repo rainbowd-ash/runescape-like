@@ -2,19 +2,15 @@ extends CharacterBody3D
 
 @export var movement_speed : float = 4.0
 @export var rotation_speed : float = 5.0
+@export var inventory_control : CtrlInventoryGrid
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 
 var target_interactable : Node3D
 
 func _ready():
-	# Make sure to not await during _ready.
-	actor_setup.call_deferred()
 	navigation_agent.connect("navigation_finished", _on_navigation_finished)
-
-func actor_setup():
-	# Wait for the first physics frame so the NavigationServer can sync.
-	await get_tree().physics_frame
+	inventory_control.connect("inventory_item_clicked", _on_inventory_item_clicked)
 
 func set_movement_target(movement_details : Dictionary):
 	if movement_details.has('target_position'):
@@ -43,3 +39,6 @@ func _on_navigation_finished():
 	if not target_interactable.has_method("interact"):
 		return
 	target_interactable.interact()
+
+func _on_inventory_item_clicked(item, at_position, mouse_button_index):
+	print(item.get_title())

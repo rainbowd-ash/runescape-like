@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsxpbeisimrty"]
+[gd_scene load_steps=13 format=3 uid="uid://dsxpbeisimrty"]
 
 [ext_resource type="PackedScene" uid="uid://cv8s0dnbp77n7" path="res://player/player.tscn" id="1_35doi"]
 [ext_resource type="Script" path="res://world.gd" id="1_kacjv"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid.gd" id="5_55uii"]
 [ext_resource type="Script" path="res://camera_gimbal.gd" id="5_dnixe"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="6_nyupt"]
+[ext_resource type="JSON" path="res://items.json" id="7_inqr4"]
+[ext_resource type="Script" path="res://addons/gloot/core/constraints/grid_constraint.gd" id="8_blr1v"]
 [ext_resource type="PackedScene" uid="uid://2lvvgrqoqvmm" path="res://world/terrain.tscn" id="8_e1uq7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uv31r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep8v8"]
 sky_top_color = Color(0.339645, 0.495673, 1, 1)
@@ -26,6 +32,39 @@ fog_density = 0.0925
 script = ExtResource("1_kacjv")
 camera = NodePath("CameraGimbal/InnerGimbal/Camera3D")
 player = NodePath("Player")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -224.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CtrlInventoryGrid" type="Control" parent="HUD/Control/PanelContainer" node_paths=PackedStringArray("inventory")]
+custom_minimum_size = Vector2(128, 224)
+layout_mode = 2
+script = ExtResource("5_55uii")
+inventory = NodePath("../../../../Player/Inventory")
+selection_style = SubResource("StyleBoxEmpty_uv31r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1a6i2")
@@ -52,8 +91,33 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Camera3D" type="Camera3D" parent="CameraGimbal/InnerGimbal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="Player" parent="." instance=ExtResource("1_35doi")]
+[node name="Player" parent="." node_paths=PackedStringArray("inventory_control") instance=ExtResource("1_35doi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.7403, 1.28838, -125.605)
 collision_layer = 2
 wall_min_slide_angle = 1.0664
-movement_speed = 20.0
+inventory_control = NodePath("../HUD/Control/PanelContainer/CtrlInventoryGrid")
+
+[node name="Inventory" type="Node" parent="Player"]
+script = ExtResource("6_nyupt")
+protoset = ExtResource("7_inqr4")
+_serialized_format = {
+"constraints": {
+"res://addons/gloot/core/constraints/grid_constraint.gd": {
+"data": {
+"item_positions": {},
+"size": "Vector2i(4, 7)"
+},
+"name": &"GridConstraint"
+}
+},
+"items": [{
+"protoset": "res://items.json",
+"prototype_id": "shovel"
+}],
+"node_name": "Inventory",
+"protoset": "res://items.json"
+}
+
+[node name="GridConstraint" type="Node" parent="Player/Inventory"]
+script = ExtResource("8_blr1v")
+size = Vector2i(4, 7)

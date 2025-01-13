@@ -1,0 +1,6 @@
+{
+	"shovel" : {
+		"name" : "shovel",
+		"image" : "res://img/shovel_icon.png",
+	},
+}
